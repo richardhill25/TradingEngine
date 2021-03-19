@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.fpml.org/FpML-5/confirmation" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="messageId">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="messageIdScheme"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sentBy" type="xs:string"/>
+  <xs:element name="sendTo" type="xs:string"/>
+  <xs:element name="creationTimestamp" type="xs:string"/>
+  <xs:element name="partyReference">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="href" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tradeId">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="tradeIdScheme" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="partyTradeIdentifier">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:partyReference" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:tradeId" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tradeDate" type="xs:string"/>
+  <xs:element name="currency" type="xs:string"/>
+  <xs:element name="amount">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="con:observationStartDate" minOccurs="0" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:variance" minOccurs="0" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="businessDayConvention" type="xs:string"/>
+  <xs:element name="unadjustedDate">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="2009-01-29"/>
+        <xs:enumeration value="2015-03-20"/>
+        <xs:enumeration value="2011-03-18"/>
+        <xs:enumeration value="2009-01-27"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="dateAdjustments">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:businessDayConvention" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="payerPartyReference">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="href" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="receiverPartyReference">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="href" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="paymentAmount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:currency" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:amount" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="paymentDate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:unadjustedDate" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:dateAdjustments" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="adjustableDate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:unadjustedDate" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:dateAdjustments" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="expirationDate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:adjustableDate" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="equityExpirationTimeType" type="xs:string"/>
+  <xs:element name="futuresPriceValuation" type="xs:string"/>
+  <xs:element name="equityEuropeanExercise">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:expirationDate" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:equityExpirationTimeType" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="automaticExercise" type="xs:string"/>
+  <xs:element name="equityValuation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:futuresPriceValuation" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="id"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="settlementCurrency" type="xs:string"/>
+  <xs:element name="settlementType" type="xs:string"/>
+  <xs:element name="instrumentId">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="instrumentIdScheme"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="description" type="xs:string"/>
+  <xs:element name="exchangeId">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="exchangeIdScheme"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="relatedExchangeId">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="exchangeIdScheme"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="index">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:instrumentId" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:description" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:exchangeId" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:relatedExchangeId" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="singleUnderlyer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:index" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="periodMultiplier" type="xs:string"/>
+  <xs:element name="period" type="xs:string"/>
+  <xs:element name="dayType" type="xs:string"/>
+  <xs:element name="dateRelativeTo">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="href"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="relativeDate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:periodMultiplier" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:period" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:dayType" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:businessDayConvention" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:dateRelativeTo" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="valuationDate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:adjustableDate" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="closingLevel" type="xs:string"/>
+  <xs:element name="expectedN" type="xs:string"/>
+  <xs:element name="varianceAmount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:currency" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:amount" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="varianceStrikePrice" type="xs:string"/>
+  <xs:element name="varianceCap" type="xs:string"/>
+  <xs:element name="vegaNotionalAmount" type="xs:string"/>
+  <xs:element name="observationStartDate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:adjustableDate" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="variance">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:closingLevel" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:expectedN" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:varianceAmount" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:varianceStrikePrice" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:varianceCap" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:vegaNotionalAmount" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="underlyer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:singleUnderlyer" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="settlementDate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:relativeDate" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="valuation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:valuationDate" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:futuresPriceValuation" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="varianceLeg">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:payerPartyReference" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:receiverPartyReference" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:underlyer" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:settlementType" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:settlementDate" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:settlementCurrency" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:valuation" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:amount" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="multipleExchangeIndexAnnexFallback" type="xs:string"/>
+  <xs:element name="buyerPartyReference">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="href"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sellerPartyReference">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="href"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="optionType" type="xs:string"/>
+  <xs:element name="equityPremium">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:payerPartyReference" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:receiverPartyReference" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:paymentAmount" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:paymentDate" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="equityExercise">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:equityEuropeanExercise" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:automaticExercise" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:equityValuation" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:settlementCurrency" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:settlementType" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="varianceSwapTransactionSupplement">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:varianceLeg" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:multipleExchangeIndexAnnexFallback" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="masterConfirmationType" type="xs:string"/>
+  <xs:element name="masterConfirmationDate" type="xs:string"/>
+  <xs:element name="masterConfirmationAnnexDate" type="xs:string"/>
+  <xs:element name="masterConfirmationAnnexType" type="xs:string"/>
+  <xs:element name="masterConfirmation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:masterConfirmationType" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:masterConfirmationDate" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:masterConfirmationAnnexDate" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:masterConfirmationAnnexType" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tradeHeader">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:partyTradeIdentifier" maxOccurs="unbounded" minOccurs="0" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:tradeDate" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="varianceOptionTransactionSupplement">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:buyerPartyReference" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:sellerPartyReference" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:optionType" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:equityPremium" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:equityExercise" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:varianceSwapTransactionSupplement" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="documentation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:masterConfirmation" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="partyId">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="BIC1"/>
+        <xs:enumeration value="BIC6"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="partyName">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="SwapsWire Ltd (LE)"/>
+        <xs:enumeration value="Rusty"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="header">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:messageId" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:sentBy" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:sendTo" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:creationTimestamp" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="isCorrection" type="xs:string"/>
+  <xs:element name="correlationId">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="correlationIdScheme"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sequenceNumber" type="xs:string"/>
+  <xs:element name="trade">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:tradeHeader" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:varianceOptionTransactionSupplement" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:documentation" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="party">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:partyId" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:partyName" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="id" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="requestConfirmation">
+    <xs:annotation>
+      <xs:documentation>View is confirmationVersion is 5-0NS is http://www.fpml.org/FpML-5/confirmation
+== Copyright (c) 2002-2010. All rights reserved.
+== Financial Products Markup Language is subject to the FpML public license.
+== A copy of this license is available at http://www.fpml.org/license/license.html5.0:Message type is a Root of the message5.0 Messaging: changed &lt;requestTradeConfirmation> ->&lt;requestConfirmation></xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="con:header" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:isCorrection" xmlns:con="http://www.fpml.org/FpML-5/confirmation">
+          <xs:annotation>
+            <xs:documentation>5.0 Messaging: added
+                    &lt;isCorrection>
+                    &lt;correlationId>
+                    &lt;sequenceNumber></xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="con:correlationId" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:sequenceNumber" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:trade" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+        <xs:element ref="con:party" maxOccurs="unbounded" minOccurs="0" xmlns:con="http://www.fpml.org/FpML-5/confirmation"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="fpmlVersion"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
