@@ -27,6 +27,8 @@ public class TradingEngineServiceImpl implements TradingEngineService {
     	try {
     		requests.clear();
     		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		// Due to having limited amount of time I am taking a shortcut and just looping through the available files.
+		// With more time I would allow for a variable abount of input files with differing names.
     		for (int eventfileindex=0; eventfileindex<=NUMEVENTFILES; ++eventfileindex) {
     			InputStream instream = classloader.getResourceAsStream(EVENTFILENAME + eventfileindex + EVENTFILEEXT);
                 RequestConfirmation requestConfirmation = unmarshallEvent(instream);
@@ -48,7 +50,8 @@ public class TradingEngineServiceImpl implements TradingEngineService {
         RequestConfirmation event = (RequestConfirmation) jaxbUnmarshaller.unmarshal(instream);
         return event;
      }
-	
+	// Take the complete list of requests and filter them before printing the filtered list
+	// With more time I would parameterise the filter with lamda expression to allow for dynamic filters to be passed
 	public void printEvents() {
 		List<RequestConfirmation> reqs = requests
 				.stream()
@@ -60,6 +63,7 @@ public class TradingEngineServiceImpl implements TradingEngineService {
 		});		
 	 }
 	
+	// print single supplieed request
 	public void printEvent(RequestConfirmation req) {
 		System.out.print(req.getTrade().getVarianceOptionTransactionSupplement().getBuyerPartyReference().getHref() + DELIMITER +
 			  	req.getTrade().getVarianceOptionTransactionSupplement().getSellerPartyReference().getHref() + DELIMITER +
