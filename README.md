@@ -16,15 +16,6 @@ I included the XML files in the resources directory so they would be always avai
 ## Installation
 
 - Download the TradingEngine Maven project. I have also included some Eclipse project files if you wish to do an Eclipse project import but you can do a Maven import on any other IDE.
-- You may have to modify the parent section of the pom.xml file depending on what Repository you have access to. You may have to change it to:
-
-       
-        <parent>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-parent</artifactId>
-          <version>1.4.3.RELEASE</version>
-          <relativePath/> <!-- lookup parent from repository -->
-        </parent>
-       
+- You may have to modify the parent section of the pom.xml file depending on what Maven Repository you are using. 
 - Clean and build the project and run the application by launching the main in TradingEngineMain.java. 
 - Trigger the application via the Restful endpoint (http://localhost:8080/tradingengine/parseEventFiles) then the output will be available on the console.
