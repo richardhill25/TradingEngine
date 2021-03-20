@@ -6,15 +6,22 @@ I then had a service bean which simply looped through the files while un marshal
 
 I included the XML files in the resources directory so they would be always available when running the integration test or the application
 
+## Tools you will need
+Maven 3.0+ is your build tool
+Your favorite IDE (I am using Eclipse as I am too cheap to pay for Intellij)
+JDK 1.8+ (when building, make sure your IDE is using the JDK and not the JRE)
+
 ## Installation
 
 - Download the TradingEngine Maven project. I have also included some Eclipse project files if you wish to do an Eclipse project import but you can do a Maven import on any other IDE.
 - You may have to modify the parent section of the pom.xml file depending on what Repository you have access to. You may have to change it to
     <parent>
+      ```xml
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-parent</artifactId>
       <version>1.4.3.RELEASE</version>
       <relativePath/> <!-- lookup parent from repository -->
     </parent>
-- Clean and build the project (do not skip tests) and run the application. 
+    ```xml
+- Clean and build the project and run the application by launching the main in TradingEngineMain.java. 
 - Trigger the application via the Restful endpoint (http://localhost:8080/tradingengine/parseEventFiles) then the output will be available on the console.
