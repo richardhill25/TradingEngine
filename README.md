@@ -1,8 +1,10 @@
 # Trade Engine
 Is a small application that solves a supplied programming problem.
 I only had a 2-3 hours to put this together due to work and family commitments. Thus I chose the simplest design while satisfying the requirements.
+
 My main design choice was to generate a POJO of the Event XML structure using JAXB and simply un marshalling the contents of the xml files into an array of the object graph.
 I then had a service bean which simply looped through the files while un marshalling the XML before filtering the list of events and outputting the desired events to the console.
+By creating the full object graph for each xml event, I am carrying more data in memory than I need to. But I believe the performance hit is small and I am simplifying any future development requirements that might require access to other attributes in the events.
 
 I included the XML files in the resources directory so they would be always available when running the integration test or the application
 
