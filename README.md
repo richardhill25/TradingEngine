@@ -15,7 +15,7 @@ I included the XML files in the resources directory so they would be always avai
 
 ## Installation
 
-- Download the TradingEngine Maven project. I have also included some Eclipse project files if you wish to do an Eclipse project import but you can do a Maven import on any other IDE.
+- Download the TradingEngine Maven project. 
 - You may have to modify the parent section of the pom.xml file depending on what Maven Repository you are using. 
-- Clean and build the project and run the application by launching the main in TradingEngineMain.java. 
+- Clean and build the project and run the application by launching the main in TradingEngineMain.java which will spin up a Tomcat session and launch the application within. If launching via Eclipse, you may have to add a the Java nature (org.eclipse.jdt.core.javanature) to your .project file and reimport.
 - Trigger the application via the Restful endpoint (http://localhost:8080/tradingengine/parseEventFiles) then the output will be available on the console.
